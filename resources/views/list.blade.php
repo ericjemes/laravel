@@ -12,7 +12,7 @@
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal group-border hover-stripped" action="">
-                                    @foreach($query as $key=>$val)
+                                    @foreach($tpl::query() as $key=>$val)
                                         @if ($val['type'] == 'text')
                                             <div class="form-group">
                                                 <label class="col-lg-2 col-md-2 col-sm-12 control-label">{{$val['name']}}</label>
@@ -27,6 +27,7 @@
                                                 <label class="col-lg-2 col-md-2 col-sm-12 control-label">{{$val['name']}}</label>
                                                 <div class="col-lg-8 col-md-8">
                                                     <select class="form-control" name="{{$val['key']}}">
+                                                        <option selected value="">请选择</option>
                                                         @foreach ($val['list'] as $lkey=>$lval)
                                                             <option @if(is_numeric($val['value']) && $val['value'] == (int)$lkey) selected
                                                                     @endif value="{{$lkey}}">{{$lval}}</option>
@@ -62,7 +63,7 @@
                                 <table class="table display" id="datatable">
                                     <thead>
                                     <tr>
-                                        @foreach($head as $key=>$val)
+                                        @foreach($tpl::head() as $key=>$val)
                                             <th>{{$val}}</th>
                                         @endforeach
                                     </tr>
@@ -70,24 +71,8 @@
                                     <tbody>
                                     @foreach($data['list'] as $val)
                                         <tr class="odd gradeX">
-                                            @foreach($head as $key=>$column)
-                                                @if ($key=='buttons' && isset($val['buttons']))
-                                                    <td>
-                                                        @foreach($val['buttons'] as $key=>$val)
-                                                            @if($val['type'] == 'page')
-                                                                <button type="button" class="btn btn-xs btn-default"><a
-                                                                            href="{{$val['url']}}">{{$val['name']}}</a>
-                                                                </button>
-                                                            @elseif($val['type'] == 'ajax')
-                                                                <button type="button"
-                                                                        class="btn btn-xs btn-default J_confirm_modal"
-                                                                        data-url="{{$val['url']}}">{{$val['name']}}</button>
-                                                            @endif
-                                                        @endforeach
-                                                    </td>
-                                                @else
-                                                    <td>@if(isset($map[$key]) && isset($map[$key][$val[$key]])) {{$map[$key][$val[$key]]}} @else {{$val[$key]}} @endif</td>
-                                                @endif
+                                            @foreach($tpl::$header as $headKey)
+                                            <td>@if(isset($tpl::$map[$headKey])) {{$tpl::$map[$headKey][$val[$headKey]]}} @else {{$val[$headKey]}} @endif</td>
                                             @endforeach
                                         </tr>
                                     @endforeach

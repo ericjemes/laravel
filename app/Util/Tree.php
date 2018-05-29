@@ -28,22 +28,22 @@ class Tree
         $menulist = [];
         foreach ($data as $key => $val) {
             $val[$childName] = [];                          //没人节点都有一个$childName子节点
-            if (!isset($$val[$currID])) {
-                $$val[$currID] = $val;                      //每个节点定义一个变量
+            if (!isset(${$val[$currID]})) {
+                ${$val[$currID]} = $val;                      //每个节点定义一个变量
             }
         }
         foreach ($data as $key => $val) {
-            $pid = &$$val[$parentID];                       //父节点指向地址
+            $pid = &${$val[$parentID]};                     //父节点指向地址
             if (!isset($pid[$childName])) {                 //父节点创建子节点目录
                 $pid[$childName] = [];
             }
-            $pid[$childName][] = &$$val[$currID];           //子节点地址处理
+            $pid[$childName][] = &${$val[$currID]};         //子节点地址处理
             if (empty($val[$parentID])) {                   //父级ID为0或者为空，则默认为根目录
-                $menulist [] = &$$val[$currID];             //根节点付给返回的数组
+                $menulist [] = &${$val[$currID]};           //根节点付给返回的数组
             }
         }
         foreach ($data as $key => $val) {                   //释放变量
-            unset($$val[$currID]);
+            unset(${$val[$currID]});
         }
         return $menulist;
     }

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
-use App\Module\Menu as MenuModule;
+use App\Module\Menu;
 use App\Module\Tpl\Menu as MenuTpl;
 use Illuminate\Http\Request;
 
@@ -20,39 +20,24 @@ class MenuController extends Controller
     {
         try {
             $filed = [
-                'id' => 'sometime|string',
+                'id'        => 'sometime|string',
                 'parent_id' => 'sometime|string',
-                'key' => 'sometime|string',
-                'name' => 'sometime|string',
-                'type' => 'sometime|uint',
-                'page' => 'sometime|uint|min:1',
-                'page_size' => 'sometime|uint|min:1',
+                'key'       => 'sometime|string',
+                'name'      => 'sometime|string',
+                'type'      => 'sometime|uint',
+                'page'      => 'sometime|uint|min:1',
+                'size' => 'sometime|uint|min:1',
             ];
-
-            $param = self::validate($filed, array_filter($request->all(), function ($val) {
-                return $val != '';
-            }));
+            $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
+            $this->viewData['tpl'] = MenuTpl::getTpl($param);
             $page = isset($param['page']) ? $param['page'] : 1;
-            $pageSize = isset($param['page_size']) ? $param['page_size'] : 10;
-            unset($param['page'], $param['page_size']);
+            $pageSize = isset($param['size']) ? $param['size'] : 10;
+            unset($param['page'], $param['size']);
             if (isset($param['name'])) {
                 $param['like'] = ['name' => '%' . $param['name'] . '%'];
                 unset($param['name']);
             }
-            $list = MenuModule::lists($param, $page, $pageSize);
-            $list['list'] = $this->formatData($list['list']);
-            $this->viewData['data'] = $list;
-            $this->viewData['head'] = MenuModule::headerData();
-            $query = [
-                'id' => [],
-                'key' => [],
-                'name' => [],
-                'type' => [],
-                'parent_id' => ['type' => 'select', 'list' => [''=>'请选择', 0=>'根菜单'] + MenuModule::listsMap()],
-            ];
-            $this->viewData['query'] = MenuTpl::getTpl($query, $param);
-            $this->viewData['map'] = MenuTpl::getMap();
-            $this->viewData['select_menu'] = 'menu_list';
+            $this->viewData['data'] = Menu::lists($param, $page, $pageSize, 'id', 'desc', MenuTpl::$header);
             return $this->view('list');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());

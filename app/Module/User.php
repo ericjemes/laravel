@@ -12,7 +12,7 @@ use App\Util\Arr;
 use App\Model\Menu as MenuModel;
 use DB;
 
-class User extends Base
+class User //extends Base
 {
 
     /**

@@ -2,24 +2,22 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Log;
 
-class JobScript extends Command
+class JobScript
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'test';
+    static $signature = 'test';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'i am a good man';
+    static $description = 'i am a good man';
 
     /**
      * Create a new command instance.

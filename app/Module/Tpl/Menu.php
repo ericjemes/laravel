@@ -13,7 +13,6 @@ class Menu extends BaseTpl
             'require' => false,
             'readonly' => false,
             'value' => '',
-            'list' => [],
         ],
         'name' => [
             'key' => 'name',
@@ -22,7 +21,6 @@ class Menu extends BaseTpl
             'require' => true,
             'readonly' => false,
             'value' => '',
-            'list' => [],
         ],
         'parent_id' => [
             'key' => 'parent_id',
@@ -31,7 +29,6 @@ class Menu extends BaseTpl
             'require' => true,
             'readonly' => false,
             'value' => '',
-            'list' => [],
         ],
         'url' => [
             'key' => 'url',
@@ -40,7 +37,6 @@ class Menu extends BaseTpl
             'require' => false,
             'readonly' => false,
             'value' => '',
-            'list' => [],
         ],
         'key' => [
             'key' => 'key',
@@ -49,21 +45,23 @@ class Menu extends BaseTpl
             'require' => false,
             'readonly' => false,
             'value' => '',
-            'list' => [],
         ],
-        'type' => [
+        'type' => array(
             'key' => 'type',
             'name' => '菜单类型',
             'type' => 'select',
             'require' => true,
             'readonly' => false,
             'value' => '',
-            'list' => [
-                ''=>'请选择',
-                0 => '菜单',
-                1 => '权限',
-                2 => '资源',
-            ],
+            'list' => [],
+        ),
+        'icon' => [
+            'key' => 'icon',
+            'name' => '图标',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
         ],
         'status' => [
             'key' => 'status',
@@ -72,27 +70,31 @@ class Menu extends BaseTpl
             'require' => false,
             'readonly' => false,
             'value' => '',
-            'list' => [
-                ''=>'请选择',
-                1 => '正常',
-                0 => '失效'
-            ],
+            'list' => [],
         ],
-        'icon' => [
-            'key' => 'icon',
-            'name' => '图标',
+        'create_time' => [
+            'key' => 'create_time',
+            'name' => '创建时间',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
             'value' => '',
-            'list' => [],
+        ],
+        'update_time' => [
+            'key' => 'update_time',
+            'name' => '更新时间',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
         ],
     ];
 
     public static $map = [
         'type' =>  [
             0 => '菜单',
-            1 => '权限'
+            1 => '权限',
+            2 => '资源',
         ],
         'status'=>[
             1 => '正常',
@@ -100,45 +102,56 @@ class Menu extends BaseTpl
         ]
     ];
 
-    /**
-     * 获取tpl模板
-     * @author gaojian291
-     * @date 2017-05-18
-     * @param array $rules required [                   //选择的模板
-     *      'id'    =>['require'=>true,type=>'text'],
-     *      'name'  =>['require'=>true,type=>'text'],
-     * ]
-     * @param array $data option description [          //默认value值
-     *      'id'=>'10001',
-     *      'name'=>'jemes',
-     * ]
-     * @return array
-     */
-    public static function getTpl($rules = [], $data = [])
-    {
-        $returnTpl = [];
-        if (empty($rules)) {
-            $returnTpl = static::$tpl;
-        } else {
-            foreach ($rules as $key=>$val) {
-                if (isset(static::$tpl[$key])) {
-                    $returnTpl[$key] = static::$tpl[$key];
-                    $returnTpl[$key] = array_merge($returnTpl[$key], $val);
-                }
-            }
-        }
+    public static $header = [
+        'id',
+        'name',
+        'parent_id',
+        'url',
+        'type',
+        'create_time',
+        'update_time',
+//        'buttons' => 8
+    ];
 
-        foreach ($data as $key=>$val) {
-            if (isset($returnTpl[$key])) {
-                $returnTpl[$key]['value'] = $val;
+
+    public static $query = [
+        'id',
+        'name',
+        'parent_id',
+        'type'
+    ];
+
+    public static function getTpl($param)
+    {
+        $self = new self;
+        $self::$tpl = array_map(function($val) use ($param) {
+            if ($val['type'] == 'select') {
+                $val['list'] = isset(self::$map[$val['key']]) ? self::$map[$val['key']] : [];
             }
-        }
-        return $returnTpl;
+            if (isset($param[$val['key']])) {
+                $val['value'] = $param[$val['key']];
+            }
+            return $val;
+        }, $self::$tpl);
+        return $self;
     }
 
-    public static function getMap()
+
+    public static function query()
     {
-        return self::$map;
+        return array_filter(self::$tpl, function ($val) {
+            return in_array($val['key'], self::$query);
+        });
+    }
+
+
+    public static function head()
+    {
+        return array_map(function ($val) {
+            if (isset(self::$tpl[$val])) {
+                return self::$tpl[$val]['name'];
+            }
+        }, self::$header);
     }
 
 }

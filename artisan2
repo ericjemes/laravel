@@ -21,7 +21,7 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 |
 */
 
-require_once __DIR__ . '/app/Console3/Kernel.php';
+require_once __DIR__ . '/app/Console/Kernel.php';
 
 $kernel = new App\Console\Kernel();
 

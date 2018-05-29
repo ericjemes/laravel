@@ -13,8 +13,9 @@ class Controller extends BaseController
 {
 
     public $viewData = [
-        'menu' => [],
+        'tpl' => [],
         'data' => [],
+        'menu' => [],
     ];
 
     public $userID = 0;

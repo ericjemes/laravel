@@ -96,7 +96,6 @@ class UserController extends Controller
     public function login(Request $request)
     {
         try {
-//            Log::info('This is some useful information.');
             $filed = [
                 'mobile' => 'require|mobile',
                 'password' => 'require|string|length:6',

@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
-use Log;
+//use Illuminate\Console\Command;
+//use Illuminate\Foundation\Inspiring;
+//use Log;
 
-class Inspire extends Command
+class Inspire
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'inspire';
+    static $signature = 'inspire';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    static $description = 'Display an inspiring quote';
 
     /**
      * Execute the console command.
@@ -29,6 +29,9 @@ class Inspire extends Command
      */
     public function handle()
     {
+        echo "<pre>";
+        print_r('handle');
+        exit;
         $time = date('Y-m-d H:i:s');
         Log::info('Showing user profile for user: ' . getmypid() .$time);
 //        sleep(70);

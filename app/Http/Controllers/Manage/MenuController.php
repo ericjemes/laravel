@@ -20,10 +20,6 @@ class MenuController extends Controller
     public function add(Request $request)
     {
         try {
-            //log4.4
-            //log4.3
-            //log4.2
-            //log2
             $filed = [
                 'name' => 'require|string|length:1',
                 'parent_id' => 'require|uint|min:0',

@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Console;
 
-use App\Util\Console\Schedule;
-//use App\Util\Console\Kernel as ConsoleKernel;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Util\Console\Kernel as BaseKernel;
 
-class Kernel
+class Kernel extends BaseKernel
 {
+
     /**
      * The Artisan commands provided by your application.
      *
@@ -18,19 +16,18 @@ class Kernel
          Commands\JobScript::class,
     ];
 
+
     /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    public function handle()
+    protected function schedule(Schedule $schedule)
     {
-        $schedule = new Schedule();
-        $schedule->command('inspire')->everyMinute();
-        $schedule->command('test')->cron('0 0 12 * *');
-        echo "<pre>";
-        print_r($schedule);
-        exit;
+//         $schedule->command('inspire')->hourly();
+         $schedule->command('inspire')->everyMinute();
+         $schedule->command('test')->everyMinute();
     }
 }
+
