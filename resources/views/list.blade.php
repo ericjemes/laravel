@@ -63,18 +63,36 @@
                                 <table class="table display" id="datatable">
                                     <thead>
                                     <tr>
-                                        @foreach($tpl::head() as $key=>$val)
-                                            <th>{{$val}}</th>
-                                        @endforeach
+                                    @foreach($tpl::head() as $key=>$val)
+                                        <th>{{$val}}</th>
+                                    @endforeach
+                                    @if (!empty($tpl::$buttons))
+                                            <th>操作</th>
+                                    @endif
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($data['list'] as $val)
-                                        <tr class="odd gradeX">
-                                            @foreach($tpl::$header as $headKey)
-                                            <td>@if(isset($tpl::$map[$headKey])) {{$tpl::$map[$headKey][$val[$headKey]]}} @else {{$val[$headKey]}} @endif</td>
+                                    <tr class="odd gradeX">
+                                        @foreach($tpl::$header as $headKey)
+                                        <td>@if(isset($tpl::$map[$headKey][$val[$headKey]])) {{$tpl::$map[$headKey][$val[$headKey]]}} @else {{$val[$headKey]}} @endif</td>
+                                        @endforeach
+                                        @if (!empty($tpl::$buttons))
+                                            <td>
+                                            @foreach($tpl::$buttons as $bKey=>$bVal)
+                                                @if($bVal['type'] == 'page')
+                                                <button type="button" class="btn btn-xs btn-default"><a
+                                                href="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</a>
+                                                </button>
+                                                @elseif($bVal['type'] == 'ajax')
+                                                <button type="button"
+                                                class="btn btn-xs btn-default J_confirm_modal"
+                                                data-url="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</button>
+                                                @endif
                                             @endforeach
-                                        </tr>
+                                            </td>
+                                        @endif
+                                    </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

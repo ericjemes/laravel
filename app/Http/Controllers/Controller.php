@@ -33,7 +33,6 @@ class Controller extends BaseController
      */
     public function view($path)
     {
-        $this->debug();
         if (isset($_COOKIE['token'])) {
             $user = UserModule::getUserIDByToken($_COOKIE['token']);
             if ($user) {
@@ -41,6 +40,7 @@ class Controller extends BaseController
                 $this->viewData['menu'] = $userInfo = MenuModule::getMenu($user['user_id']);
             }
         }
+        $this->debug();
         return view($path, $this->viewData);
     }
 
@@ -89,7 +89,8 @@ class Controller extends BaseController
         $model = Validate::check($field, $params, $message);
         if ($model->fail()) {
             try {
-                $msg = reset($model->getErrorMsg());
+                $error = $model->getErrorMsg();
+                $msg = reset($error);
             } catch (\Exception $e) {
                 $msg = '参数错误';
             }

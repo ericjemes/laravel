@@ -26,12 +26,12 @@ class MenuController extends Controller
                 'name'      => 'sometime|string',
                 'type'      => 'sometime|uint',
                 'page'      => 'sometime|uint|min:1',
-                'size' => 'sometime|uint|min:1',
+                'size'      => 'sometime|uint|min:1',
             ];
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $this->viewData['tpl'] = MenuTpl::getTpl($param);
             $page = isset($param['page']) ? $param['page'] : 1;
-            $pageSize = isset($param['size']) ? $param['size'] : 10;
+            $pageSize = isset($param['size']) ? $param['size'] : 50;
             unset($param['page'], $param['size']);
             if (isset($param['name'])) {
                 $param['like'] = ['name' => '%' . $param['name'] . '%'];
@@ -58,10 +58,9 @@ class MenuController extends Controller
             $filed = [
                 'id' => 'require|uint|min:1',
             ];
-            $data = compact('id');
-            self::validate($filed, $data);
-            $this->viewData['form'] = MenuTpl::getTpl([], MenuModule::show($id));
-            unset($this->viewData['form']['password']);
+            $param = compact('id');
+            $param = self::validate($filed, $param);
+            $this->viewData['tpl'] = MenuTpl::getTpl(Menu::show($param));
             return $this->view('show');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());
@@ -82,19 +81,9 @@ class MenuController extends Controller
             $filed = [
                 'id' => 'require|uint|min:1',
             ];
-            $data = compact('id');
-            self::validate($filed, $data);
-            $form = [
-                'id' => ['readonly' => true],
-                'key' => [],
-                'name' => [],
-                'type' => [],
-                'url' => [],
-                'parent_id' => ['type' => 'select', 'list' => [''=>'请选择', 0=>'根菜单'] + MenuModule::listsMap()],
-                'icon' => [],
-            ];
-            $this->viewData['form'] = MenuTpl::getTpl($form, MenuModule::show($id));
-            $this->viewData['ajax'] = '/ajax/menu/update';
+            $param = compact('id');
+            $param = self::validate($filed, $param);
+            $this->viewData['tpl'] = MenuTpl::getTpl(Menu::show($param));
             return $this->view('update');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());
@@ -112,18 +101,8 @@ class MenuController extends Controller
     public function add()
     {
         try {
-            $query = [
-                'name' => [],
-                'parent_id' => ['type' => 'select', 'list' => [''=>'请选择', 0=>'根菜单'] + MenuModule::listsMap()],
-                'url' => [],
-                'key' => [],
-                'type' => [],
-                'icon' => [],
-            ];
-            $this->viewData['form'] = MenuTpl::getTpl($query);
-            $this->viewData['ajax'] = '/ajax/menu/add';
-            $this->viewData['select_menu'] = 'menu_add';
-            return $this->view('update');
+            $this->viewData['tpl'] = MenuTpl::getTpl();
+            return $this->view('add');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());
         }

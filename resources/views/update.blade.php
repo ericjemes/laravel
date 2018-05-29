@@ -12,7 +12,7 @@
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal group-border hover-stripped" action="" id="validate">
-                                    @foreach($form as $key=>$val)
+                                    @foreach($tpl::data() as $key=>$val)
                                         @if ($val['type'] == 'text')
                                             <div class="form-group">
                                                 <label class="col-lg-2 col-md-2 col-sm-12 control-label">{{$val['name']}}</label>
@@ -61,7 +61,7 @@
             $('.J_submit').on('click', function () {
                 var data = $("form").serializeArray();
                 $.ajax({
-                    url: "{{$ajax}}",
+                    url: "{{$tpl::$updateUrl}}",
                     type:'post',
                     data: data,
                     success: function(data) {

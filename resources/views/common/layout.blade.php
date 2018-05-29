@@ -99,6 +99,6 @@
 
 <script src="/assets/plugins/ui/notify/jquery.gritter.js"></script>			     <!--info hint-->
 <script src="/assets/plugins/ui/bootbox/bootbox.js"></script>					 <!--fonfirm alert-->
-{{--<script src="/assets/plugins/ui/tabdrop/bootstrap-tabdrop.js"></script>          //fonfirm alert--}}
+<script src="/assets/plugins/ui/tabdrop/bootstrap-tabdrop.js"></script>          //fonfirm alert
 </body>
 </html>

@@ -26,7 +26,7 @@ class BaseModel extends Model
             'list'       => []
         ];
         $returnData['page'] = $page = $page > 0 ? (int)$page : 1;
-        $returnData['size'] = $size = $size > 0 && $size < 50 ? (int)$size : 10;
+        $returnData['size'] = $size = $size > 0 && $size <= 50 ? (int)$size : 10;
         $operate = ['<','<=','>','>=','!=','in','notin','or','between','like'];
         foreach ($param as $key => $val) {
             if (in_array($key, $operate)) {

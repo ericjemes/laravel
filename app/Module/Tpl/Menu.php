@@ -11,7 +11,7 @@ class Menu extends BaseTpl
             'name' => '菜单ID',
             'type' => 'text',
             'require' => false,
-            'readonly' => false,
+            'readonly' => true,
             'value' => '',
         ],
         'name' => [
@@ -68,7 +68,7 @@ class Menu extends BaseTpl
             'name' => '数据状态',
             'type' => 'select',
             'require' => false,
-            'readonly' => false,
+            'readonly' => true,
             'value' => '',
             'list' => [],
         ],
@@ -77,7 +77,7 @@ class Menu extends BaseTpl
             'name' => '创建时间',
             'type' => 'text',
             'require' => false,
-            'readonly' => false,
+            'readonly' => true,
             'value' => '',
         ],
         'update_time' => [
@@ -85,7 +85,7 @@ class Menu extends BaseTpl
             'name' => '更新时间',
             'type' => 'text',
             'require' => false,
-            'readonly' => false,
+            'readonly' => true,
             'value' => '',
         ],
     ];
@@ -110,7 +110,6 @@ class Menu extends BaseTpl
         'type',
         'create_time',
         'update_time',
-//        'buttons' => 8
     ];
 
 
@@ -121,7 +120,32 @@ class Menu extends BaseTpl
         'type'
     ];
 
-    public static function getTpl($param)
+
+    public static $buttons = [
+        [
+            'type' => 'page',
+            'name' => '查看',
+            'url' => "/menu/show/{id}"
+        ],
+        [
+            'type' => 'page',
+            'name' => '更新',
+            'url' => "/menu/update/{id}"
+        ],
+        [
+            'type' => 'ajax',
+            'name' => '删除',
+            'url' => "/ajax/menu/delete/{id}"
+        ]
+    ];
+
+    //数据更新接口
+    public static $updateUrl = '/ajax/menu/update';
+    //数据添加接口
+    public static $addUrl = '/ajax/menu/add';
+
+
+    public static function getTpl($param = [])
     {
         $self = new self;
         $self::$tpl = array_map(function($val) use ($param) {
@@ -152,6 +176,11 @@ class Menu extends BaseTpl
                 return self::$tpl[$val]['name'];
             }
         }, self::$header);
+    }
+
+    public static function data()
+    {
+        return self::$tpl;
     }
 
 }

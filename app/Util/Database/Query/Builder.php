@@ -1904,12 +1904,9 @@ class Builder
 
     public function onlyTrashed()
     {
-        echo "<pre>";
-        print_r(5555555555);
-        exit;
-//        $model = $this->getModel();
-//        $this->where($model->getQualifiedStatusColumn(), $model->getInvalidStatus());
-//        return $this;
+        $model = $this->getModel();
+        $this->where($model->getQualifiedStatusColumn(), $model->getInvalidStatus());
+        return $this;
     }
 
     /**
@@ -1921,9 +1918,6 @@ class Builder
      */
     public function __call($method, $parameters)
     {
-        echo "<pre>";
-        print_r(4444);
-        exit;
         if (static::hasMacro($method)) {
             return $this->macroCall($method, $parameters);
         }

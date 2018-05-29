@@ -76,9 +76,9 @@ class MenuController extends Controller
             $filed = [
                 'id' => 'require|uint|min:1',
             ];
-            $data = compact('id');
-            self::validate($filed, $data);
-            return $this->responseSuccess(MenuModule::delete($id));
+            $param = compact('id');
+            $param = self::validate($filed, $param);
+            return $this->responseSuccess(MenuModule::del($param));
         } catch (\Exception $e) {
             return $this->responseError($e->getCode(), $e->getMessage());
         }
