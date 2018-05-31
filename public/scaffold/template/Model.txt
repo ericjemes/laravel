@@ -2,11 +2,16 @@
 
 namespace App\Model;
 
-class Role extends BaseModel
+class {{key}}Model extends BaseModel
 {
 
-    protected $table = 't_manage_role';
+    protected $table = '{{table}}';
 
+    const STATUS = 'status';                                                    //软删除字段
+
+    const CREATED_AT = 'create_time';                                           //创建时间
+
+    const UPDATED_AT = 'update_time';                                           //更新时间
 
     /**
      * 获取当前时间
@@ -43,15 +48,7 @@ class Role extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'id',
-        'is_admin',
-        'name',
-        'desc',
-        'menu_json',
-        'status',
-        'create_time',
-        'update_time',
-        'delete_time',
+       {{column}}
     ];
 
 

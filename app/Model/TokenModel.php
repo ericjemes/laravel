@@ -2,10 +2,16 @@
 
 namespace App\Model;
 
-class Token extends BaseModel
+class TokenModel extends BaseModel
 {
+
     protected $table = 't_manage_token';
 
+    const STATUS = 'status';                                                    //软删除字段
+
+    const CREATED_AT = 'create_time';                                           //创建时间
+
+    const UPDATED_AT = 'update_time';                                           //更新时间
 
     /**
      * 获取当前时间

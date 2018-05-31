@@ -2,14 +2,13 @@
 
 namespace App\Module;
 
-use App\Model\User as UserModel;
-use App\Model\ActivityGift;
-use App\Model\Role as RoleModel;
-use App\Model\Token as TokenModel;
+use App\Model\UserModel;
+use App\Model\RoleModel;
+use App\Model\TokenModel;
 use App\Exceptions\ServiceException;
 use App\Util\Aes;
 use App\Util\Arr;
-use App\Model\Menu as MenuModel;
+use App\Model\MenuModel;
 use DB;
 
 class User //extends Base

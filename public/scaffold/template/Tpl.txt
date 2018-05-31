@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Module\Tpl;
+
+
+class {{key}} extends BaseTpl
+{
+    public static $tpl = [
+        {{tpl}}
+    ];
+
+    public static $map = [
+        {{enum}}
+    ];
+
+    public static $header = [
+       {{column}}
+    ];
+
+
+    public static $query = [
+        {{column}}
+    ];
+
+
+    public static $buttons = [
+        [
+            'type' => 'page',
+            'name' => '查看',
+            'url' => "/{{key}}/show/{id}"
+        ],
+        [
+            'type' => 'page',
+            'name' => '更新',
+            'url' => "/{{key}}/update/{id}"
+        ],
+        [
+            'type' => 'ajax',
+            'name' => '删除',
+            'url' => "/ajax/{{key}}/delete/{id}"
+        ]
+    ];
+
+    //数据更新接口
+    public static $updateUrl = '/ajax/{{key}}/update';
+    //数据添加接口
+    public static $addUrl = '/ajax/{{key}}/add';
+}

@@ -143,44 +143,4 @@ class Menu extends BaseTpl
     public static $updateUrl = '/ajax/menu/update';
     //数据添加接口
     public static $addUrl = '/ajax/menu/add';
-
-
-    public static function getTpl($param = [])
-    {
-        $self = new self;
-        $self::$tpl = array_map(function($val) use ($param) {
-            if ($val['type'] == 'select') {
-                $val['list'] = isset(self::$map[$val['key']]) ? self::$map[$val['key']] : [];
-            }
-            if (isset($param[$val['key']])) {
-                $val['value'] = $param[$val['key']];
-            }
-            return $val;
-        }, $self::$tpl);
-        return $self;
-    }
-
-
-    public static function query()
-    {
-        return array_filter(self::$tpl, function ($val) {
-            return in_array($val['key'], self::$query);
-        });
-    }
-
-
-    public static function head()
-    {
-        return array_map(function ($val) {
-            if (isset(self::$tpl[$val])) {
-                return self::$tpl[$val]['name'];
-            }
-        }, self::$header);
-    }
-
-    public static function data()
-    {
-        return self::$tpl;
-    }
-
 }

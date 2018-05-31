@@ -2,13 +2,16 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class User extends BaseModel
+class UserModel extends BaseModel
 {
-//    use SoftDeletes;
 
     protected $table = 't_manage_user';
+
+    const STATUS = 'status';                                                    //软删除字段
+
+    const CREATED_AT = 'create_time';                                           //创建时间
+
+    const UPDATED_AT = 'update_time';                                           //更新时间
 
     /**
      * 获取当前时间

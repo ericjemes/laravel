@@ -2,11 +2,10 @@
 
 namespace App\Module;
 
-use App\Model\Menu as MenuModel;
-use App\Model\User as UserModel;
-use App\Model\Role as RoleModel;
+use App\Model\MenuModel;
+use App\Model\UserModel;
+use App\Model\RoleModel;
 use App\Exceptions\ServiceException;
-use App\Module\BaseModule;
 
 class Menu extends BaseModule
 {

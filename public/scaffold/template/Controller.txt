@@ -2,22 +2,22 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
-use App\Module\Tpl\Role as RoleTpl;
+use App\Module\Tpl\{{key}} as {{key}}Tpl;
 use Illuminate\Http\Request;
-use App\Module\Role;
+use App\Module\{{key}};
 
 
 /**
- * Role class
+ * {{key}} class
  * @desc more description
- * @date 2018-05-31
+ * @date {{date}}
  */
-class RoleController extends Controller
+class {{key}}Controller extends Controller
 {
 
     /**
-     * Role lists
-     * @date 2018-05-31
+     * {{key}} lists
+     * @date {{date}}
      * @param Request $request $request 请求requset对象
      * @return view
      */
@@ -25,21 +25,14 @@ class RoleController extends Controller
     {
         try {
             $filed = [
-                'id'=>'sometime|int|min:0',                                                         //自增ID
-                'is_admin'=>'sometime|int|min:0',                                                   //是否管理员 0:否 1:是
-                'name'=>'sometime|string|length:[0,50]',                                            //角色名称
-                'desc'=>'sometime|string|length:[0,50]',                                            //角色说明
-                'menu_json'=>'sometime|string|length:[0,200]',                                      //角色分配的菜单
-                'status'=>'sometime|int|min:0',                                                     //数据状态:1:正常 0:失效
-                'create_time'=>'sometime|int|min:0',                                                //创建时间
-                'update_time'=>'sometime|int|min:0',                                                //更新时间
+                {{validate}}
                 'page'=>'sometime|int|min:1',                                                       //更新时间
                 'size'=>'sometime|int|between:[1,50]',                                              //更新时间
             ];
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $query = array_except($param, ['page','size']);
-            $this->viewData['tpl'] = RoleTpl::getTpl($query);
-            $this->viewData['data'] = Role::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', RoleTpl::$header);
+            $this->viewData['tpl'] = {{key}}Tpl::getTpl($query);
+            $this->viewData['data'] = {{key}}::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', {{key}}Tpl::$header);
             return $this->view('list');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -47,8 +40,8 @@ class RoleController extends Controller
     }
 
     /**
-     * Role detail
-     * @date 2018-05-31
+     * {{key}} detail
+     * @date {{date}}
      * @param int $id request 主键id
      * @return view
      */
@@ -60,7 +53,7 @@ class RoleController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = RoleTpl::getTpl(Role::show($param));
+            $this->viewData['tpl'] = {{key}}Tpl::getTpl({{key}}::show($param));
             return $this->view('show');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -68,8 +61,8 @@ class RoleController extends Controller
     }
 
     /**
-     * Role update
-     * @date 2018-05-31
+     * {{key}} update
+     * @date {{date}}
      * @param int $id request 主键id
      * @return view
      */
@@ -81,7 +74,7 @@ class RoleController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = RoleTpl::getTpl(Role::show($param));
+            $this->viewData['tpl'] = {{key}}Tpl::getTpl({{key}}::show($param));
             return $this->view('update');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -90,14 +83,14 @@ class RoleController extends Controller
 
 
     /**
-     * Role add
-     * @date 2018-05-31
+     * {{key}} add
+     * @date {{date}}
      * @return view
      */
     public function add()
     {
         try {
-            $this->viewData['tpl'] = RoleTpl::getTpl();
+            $this->viewData['tpl'] = {{key}}Tpl::getTpl();
             return $this->view('add');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());

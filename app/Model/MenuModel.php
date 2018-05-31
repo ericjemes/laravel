@@ -1,10 +1,17 @@
 <?php
+
 namespace App\Model;
 
-class Menu extends BaseModel
+class MenuModel extends BaseModel
 {
 
     protected $table = 't_manage_menu';
+
+    const STATUS = 'status';                                                    //软删除字段
+
+    const CREATED_AT = 'create_time';                                           //创建时间
+
+    const UPDATED_AT = 'update_time';                                           //更新时间
 
     /**
      * 获取当前时间
@@ -34,6 +41,7 @@ class Menu extends BaseModel
         return [];
     }
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,8 +54,8 @@ class Menu extends BaseModel
         'url',
         'key',
         'type',
-        'status',
         'icon',
+        'status',
         'create_time',
         'update_time',
     ];
@@ -58,7 +66,5 @@ class Menu extends BaseModel
      *
      * @var array
      */
-    protected $hidden = [
-//        'password'
-    ];
+    protected $hidden = [];
 }
