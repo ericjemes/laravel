@@ -1,7 +1,7 @@
 <?php
-namespace App\Modules;
+namespace App\Module;
 
-use App\Models\{{key}}Model;
+use App\Model\{{key}}Model;
 use App\Exceptions\ServiceException;
 
 

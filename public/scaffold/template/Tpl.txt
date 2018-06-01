@@ -17,32 +17,30 @@ class {{key}} extends BaseTpl
        {{column}}
     ];
 
-
     public static $query = [
         {{column}}
     ];
-
 
     public static $buttons = [
         [
             'type' => 'page',
             'name' => '查看',
-            'url' => "/{{key}}/show/{id}"
+            'url' => "/{{key-low}}/show/{id}"
         ],
         [
             'type' => 'page',
             'name' => '更新',
-            'url' => "/{{key}}/update/{id}"
+            'url' => "/{{key-low}}/update/{id}"
         ],
         [
             'type' => 'ajax',
             'name' => '删除',
-            'url' => "/ajax/{{key}}/delete/{id}"
+            'url' => "/ajax/{{key-low}}/delete/{id}"
         ]
     ];
 
     //数据更新接口
-    public static $updateUrl = '/ajax/{{key}}/update';
+    public static $updateUrl = '/ajax/{{key-low}}/update';
     //数据添加接口
-    public static $addUrl = '/ajax/{{key}}/add';
+    public static $addUrl = '/ajax/{{key-low}}/add';
 }

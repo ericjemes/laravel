@@ -8,7 +8,7 @@ class Menu extends BaseTpl
     public static $tpl = [
         'id' => [
             'key' => 'id',
-            'name' => '菜单ID',
+            'name' => '自增ID',
             'type' => 'text',
             'require' => false,
             'readonly' => true,
@@ -18,15 +18,15 @@ class Menu extends BaseTpl
             'key' => 'name',
             'name' => '菜单名称',
             'type' => 'text',
-            'require' => true,
+            'require' => false,
             'readonly' => false,
             'value' => '',
         ],
         'parent_id' => [
             'key' => 'parent_id',
-            'name' => '父级菜单',
+            'name' => '父菜单ID',
             'type' => 'text',
-            'require' => true,
+            'require' => false,
             'readonly' => false,
             'value' => '',
         ],
@@ -40,24 +40,24 @@ class Menu extends BaseTpl
         ],
         'key' => [
             'key' => 'key',
-            'name' => '菜单唯一key',
+            'name' => '菜单key',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
             'value' => '',
         ],
-        'type' => array(
+        'type' => [
             'key' => 'type',
             'name' => '菜单类型',
             'type' => 'select',
-            'require' => true,
+            'require' => false,
             'readonly' => false,
             'value' => '',
             'list' => [],
-        ),
+        ],
         'icon' => [
             'key' => 'icon',
-            'name' => '图标',
+            'name' => '菜单图标',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
@@ -92,14 +92,14 @@ class Menu extends BaseTpl
 
     public static $map = [
         'type' =>  [
-            0 => '菜单',
-            1 => '权限',
-            2 => '资源',
-        ],
-        'status'=>[
-            1 => '正常',
-            0 => '失效'
-        ]
+             0 => '菜单',
+             1 => '权限',
+             2 => '资源',
+         ],
+        'status' =>  [
+             1 => '正常',
+             0 => '失效',
+         ],
     ];
 
     public static $header = [
@@ -107,19 +107,26 @@ class Menu extends BaseTpl
         'name',
         'parent_id',
         'url',
+        'key',
         'type',
+        'icon',
+        'status',
         'create_time',
         'update_time',
     ];
-
 
     public static $query = [
         'id',
         'name',
         'parent_id',
-        'type'
+        'url',
+        'key',
+        'type',
+        'icon',
+        'status',
+        'create_time',
+        'update_time',
     ];
-
 
     public static $buttons = [
         [

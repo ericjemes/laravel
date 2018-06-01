@@ -3,7 +3,7 @@
 namespace App\Module\Tpl;
 
 
-class Role extends BaseTpl
+class User extends BaseTpl
 {
     public static $tpl = [
         'id' => [
@@ -14,34 +14,66 @@ class Role extends BaseTpl
             'readonly' => true,
             'value' => '',
         ],
-        'is_admin' => [
-            'key' => 'is_admin',
-            'name' => '是否管理员',
+        'name' => [
+            'key' => 'name',
+            'name' => '用户名称',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'mobile' => [
+            'key' => 'mobile',
+            'name' => '用户手机号',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'email' => [
+            'key' => 'email',
+            'name' => '邮件地址',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'password' => [
+            'key' => 'password',
+            'name' => '用户密码',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'type' => [
+            'key' => 'type',
+            'name' => '用户类型',
             'type' => 'select',
             'require' => false,
             'readonly' => false,
             'value' => '',
             'list' => [],
         ],
-        'name' => [
-            'key' => 'name',
-            'name' => '角色名称',
+        'role' => [
+            'key' => 'role',
+            'name' => '用户拥有的角色',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
             'value' => '',
         ],
-        'desc' => [
-            'key' => 'desc',
-            'name' => '角色说明',
+        'description' => [
+            'key' => 'description',
+            'name' => '个人描述',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
             'value' => '',
         ],
-        'menu_json' => [
-            'key' => 'menu_json',
-            'name' => '角色分配的菜单',
+        'address' => [
+            'key' => 'address',
+            'name' => '地址信息',
             'type' => 'text',
             'require' => false,
             'readonly' => false,
@@ -75,9 +107,9 @@ class Role extends BaseTpl
     ];
 
     public static $map = [
-        'is_admin' =>  [
-             0 => '否',
-             1 => '是',
+        'type' =>  [
+             0 => '默认',
+             1 => '微信',
          ],
         'status' =>  [
              1 => '正常',
@@ -87,10 +119,14 @@ class Role extends BaseTpl
 
     public static $header = [
         'id',
-        'is_admin',
         'name',
-        'desc',
-        'menu_json',
+        'mobile',
+        'email',
+        'password',
+        'type',
+        'role',
+        'description',
+        'address',
         'status',
         'create_time',
         'update_time',
@@ -98,10 +134,14 @@ class Role extends BaseTpl
 
     public static $query = [
         'id',
-        'is_admin',
         'name',
-        'desc',
-        'menu_json',
+        'mobile',
+        'email',
+        'password',
+        'type',
+        'role',
+        'description',
+        'address',
         'status',
         'create_time',
         'update_time',
@@ -111,22 +151,22 @@ class Role extends BaseTpl
         [
             'type' => 'page',
             'name' => '查看',
-            'url' => "/role/show/{id}"
+            'url' => "/user/show/{id}"
         ],
         [
             'type' => 'page',
             'name' => '更新',
-            'url' => "/role/update/{id}"
+            'url' => "/user/update/{id}"
         ],
         [
             'type' => 'ajax',
             'name' => '删除',
-            'url' => "/ajax/role/delete/{id}"
+            'url' => "/ajax/user/delete/{id}"
         ]
     ];
 
     //数据更新接口
-    public static $updateUrl = '/ajax/role/update';
+    public static $updateUrl = '/ajax/user/update';
     //数据添加接口
-    public static $addUrl = '/ajax/role/add';
+    public static $addUrl = '/ajax/user/add';
 }

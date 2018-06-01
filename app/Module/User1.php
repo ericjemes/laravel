@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Module;
 
 use App\Model\UserModel;
+use App\Model\RoleModel;
 use App\Model\TokenModel;
 use App\Exceptions\ServiceException;
 use App\Util\Aes;
@@ -9,21 +11,77 @@ use App\Util\Arr;
 use App\Model\MenuModel;
 use DB;
 
-/**
- * User module
- * @date 2018-06-01
- */
-class User extends BaseModule
+class User //extends Base
 {
 
     /**
-     * get new model
-     * @date 2018-06-01
-     * @return UserModel
+     * 用户列表
+     * @author gaojian291
+     * @date 2017-05-18
+     * @param array $param required 筛选参数
+     * @param int $page option 当前页
+     * @param int $pageSize option 当前页大小
+     * @param arrray|array $order option 排序字段
+     * @param string $lastID
+     * @return array
      */
-    public static function getModel()
+    public static function lists($param, $page = 1, $pageSize = 10, $order = [], $lastID = '')
     {
-        return new UserModel();
+        return UserModel::getLists($param, $page, $pageSize, $order, $lastID);
+    }
+
+
+    /**
+     * 用户详情
+     * @author gaojian291
+     * @date 2017-05-19
+     * @param string $id required 用户ID
+     * @return array
+     */
+    public static function show($id)
+    {
+        return self::_getModel(['id'=>$id])->toArray();
+    }
+
+
+
+    /**
+     * 用户添加
+     * @author gaojian291
+     * @date 2017-05-19
+     * @param array $param required 用户数据
+     * @return array
+     */
+    public static function add($param)
+    {
+        $param['password'] = Aes::strMD5($param['password']);
+        return UserModel::create($param)->getOriginal('id');
+    }
+
+
+    /**
+     * 用户更新
+     * @author gaojian291
+     * @date 2017-05-19
+     * @param array $param required 用户数据
+     * @return array
+     */
+    public static function update($param)
+    {
+        return UserModel::where('id', $param['id'])->update($param);
+    }
+
+
+    /**
+     * 用户删除
+     * @author gaojian291
+     * @date 2017-05-19
+     * @param string $id required 用户ID
+     * @return array
+     */
+    public static function delete($id)
+    {
+        return UserModel::where('id', $id)->delete();
     }
 
 
@@ -165,6 +223,5 @@ class User extends BaseModule
         }
         return $model;
     }
-
 
 }

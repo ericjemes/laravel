@@ -3,7 +3,7 @@
 namespace App\Module\Tpl;
 
 
-class Role extends BaseTpl
+class Token extends BaseTpl
 {
     public static $tpl = [
         'id' => [
@@ -14,38 +14,30 @@ class Role extends BaseTpl
             'readonly' => true,
             'value' => '',
         ],
-        'is_admin' => [
-            'key' => 'is_admin',
-            'name' => '是否管理员',
+        'user_id' => [
+            'key' => 'user_id',
+            'name' => '用户ID',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'token' => [
+            'key' => 'token',
+            'name' => '登录token',
+            'type' => 'text',
+            'require' => false,
+            'readonly' => false,
+            'value' => '',
+        ],
+        'type' => [
+            'key' => 'type',
+            'name' => '用户类型',
             'type' => 'select',
             'require' => false,
             'readonly' => false,
             'value' => '',
             'list' => [],
-        ],
-        'name' => [
-            'key' => 'name',
-            'name' => '角色名称',
-            'type' => 'text',
-            'require' => false,
-            'readonly' => false,
-            'value' => '',
-        ],
-        'desc' => [
-            'key' => 'desc',
-            'name' => '角色说明',
-            'type' => 'text',
-            'require' => false,
-            'readonly' => false,
-            'value' => '',
-        ],
-        'menu_json' => [
-            'key' => 'menu_json',
-            'name' => '角色分配的菜单',
-            'type' => 'text',
-            'require' => false,
-            'readonly' => false,
-            'value' => '',
         ],
         'status' => [
             'key' => 'status',
@@ -75,9 +67,9 @@ class Role extends BaseTpl
     ];
 
     public static $map = [
-        'is_admin' =>  [
-             0 => '否',
-             1 => '是',
+        'type' =>  [
+             0 => '默认',
+             1 => '微信',
          ],
         'status' =>  [
              1 => '正常',
@@ -87,10 +79,9 @@ class Role extends BaseTpl
 
     public static $header = [
         'id',
-        'is_admin',
-        'name',
-        'desc',
-        'menu_json',
+        'user_id',
+        'token',
+        'type',
         'status',
         'create_time',
         'update_time',
@@ -98,10 +89,9 @@ class Role extends BaseTpl
 
     public static $query = [
         'id',
-        'is_admin',
-        'name',
-        'desc',
-        'menu_json',
+        'user_id',
+        'token',
+        'type',
         'status',
         'create_time',
         'update_time',
@@ -111,22 +101,22 @@ class Role extends BaseTpl
         [
             'type' => 'page',
             'name' => '查看',
-            'url' => "/role/show/{id}"
+            'url' => "/token/show/{id}"
         ],
         [
             'type' => 'page',
             'name' => '更新',
-            'url' => "/role/update/{id}"
+            'url' => "/token/update/{id}"
         ],
         [
             'type' => 'ajax',
             'name' => '删除',
-            'url' => "/ajax/role/delete/{id}"
+            'url' => "/ajax/token/delete/{id}"
         ]
     ];
 
     //数据更新接口
-    public static $updateUrl = '/ajax/role/update';
+    public static $updateUrl = '/ajax/token/update';
     //数据添加接口
-    public static $addUrl = '/ajax/role/add';
+    public static $addUrl = '/ajax/token/add';
 }

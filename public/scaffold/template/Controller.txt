@@ -93,7 +93,7 @@ class {{key}}Controller extends Controller
             $this->viewData['tpl'] = {{key}}Tpl::getTpl();
             return $this->view('add');
         } catch (\Exception $e) {
-            return $this->errorView($e->getMessage());
+            return $this->errorView($e->getMessage(), $e->getCode());
         }
     }
 

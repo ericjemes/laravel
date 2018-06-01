@@ -2,21 +2,21 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
-use App\Module\Tpl\Role as RoleTpl;
+use App\Module\Tpl\Book as BookTpl;
 use Illuminate\Http\Request;
-use App\Module\Role;
+use App\Module\Book;
 
 
 /**
- * Role class
+ * Book class
  * @desc more description
  * @date 2018-06-01
  */
-class RoleController extends Controller
+class BookController extends Controller
 {
 
     /**
-     * Role lists
+     * Book lists
      * @date 2018-06-01
      * @param Request $request $request 请求requset对象
      * @return view
@@ -26,10 +26,14 @@ class RoleController extends Controller
         try {
             $filed = [
                 'id'=>'sometime|int|min:0',                                                         //自增ID
-                'is_admin'=>'sometime|int|min:0',                                                   //是否管理员 [0：否 1:是]
-                'name'=>'sometime|string|length:[0,50]',                                            //角色名称
-                'desc'=>'sometime|string|length:[0,50]',                                            //角色说明
-                'menu_json'=>'sometime|string|length:[0,200]',                                      //角色分配的菜单
+                'title'=>'sometime|string|length:[0,100]',                                          //书名
+                'desc'=>'sometime|string|length:[0,200]',                                           //描述
+                'author'=>'sometime|string|length:[0,100]',                                         //作者
+                'cover'=>'sometime|string|length:[0,500]',                                          //封面
+                'price'=>'sometime|int|min:0',                                                      //价格 单位:分
+                'publisher'=>'sometime|string|length:[0,100]',                                      //出版社
+                'size'=>'sometime|int|min:0',                                                       //书的大小
+                'type'=>'sometime|int|min:0',                                                       //书的类型[0:默认 1:小说 2:传记] 
                 'status'=>'sometime|int|min:0',                                                     //数据状态[1:正常 0:失效]
                 'create_time'=>'sometime|int|min:0',                                                //创建时间
                 'update_time'=>'sometime|int|min:0',                                                //更新时间
@@ -38,8 +42,8 @@ class RoleController extends Controller
             ];
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $query = array_except($param, ['page','size']);
-            $this->viewData['tpl'] = RoleTpl::getTpl($query);
-            $this->viewData['data'] = Role::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', RoleTpl::$header);
+            $this->viewData['tpl'] = BookTpl::getTpl($query);
+            $this->viewData['data'] = Book::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', BookTpl::$header);
             return $this->view('list');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -47,7 +51,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Role detail
+     * Book detail
      * @date 2018-06-01
      * @param int $id request 主键id
      * @return view
@@ -60,7 +64,7 @@ class RoleController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = RoleTpl::getTpl(Role::show($param));
+            $this->viewData['tpl'] = BookTpl::getTpl(Book::show($param));
             return $this->view('show');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -68,7 +72,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Role update
+     * Book update
      * @date 2018-06-01
      * @param int $id request 主键id
      * @return view
@@ -81,7 +85,7 @@ class RoleController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = RoleTpl::getTpl(Role::show($param));
+            $this->viewData['tpl'] = BookTpl::getTpl(Book::show($param));
             return $this->view('update');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -90,14 +94,14 @@ class RoleController extends Controller
 
 
     /**
-     * Role add
+     * Book add
      * @date 2018-06-01
      * @return view
      */
     public function add()
     {
         try {
-            $this->viewData['tpl'] = RoleTpl::getTpl();
+            $this->viewData['tpl'] = BookTpl::getTpl();
             return $this->view('add');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());

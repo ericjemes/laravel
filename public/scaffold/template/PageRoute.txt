@@ -1,0 +1,5 @@
+//{{key}}
+$router->get('{{key-low}}/list', 'Page\{{key}}Controller@lists')->name('{{key-low}}.list');
+$router->get('{{key-low}}/add', 'Page\{{key}}Controller@add')->name('{{key-low}}.add');
+$router->get('{{key-low}}/show/{id}', 'Page\{{key}}Controller@show')->name('{{key-low}}.show');
+$router->get('{{key-low}}/update/{id}', 'Page\{{key}}Controller@update')->name('{{key-low}}.update');

@@ -1,0 +1,4 @@
+//{{key}}
+$router->post('{{key-low}}/delete/{id}', 'Ajax\{{key}}Controller@delete');
+$router->post('{{key-low}}/add', 'Ajax\{{key}}Controller@add');
+$router->post('{{key-low}}/update', 'Ajax\{{key}}Controller@update');

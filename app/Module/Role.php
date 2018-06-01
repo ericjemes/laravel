@@ -1,28 +1,26 @@
 <?php
 namespace App\Module;
 
-use App\Models\RoleModel;
-use App\Model\MenuModel;
+use App\Model\RoleModel;
 use App\Exceptions\ServiceException;
 
 
 /**
- * Role1 module
- * @date 2018-05-31
+ * Role module
+ * @date 2018-06-01
  */
 class Role extends BaseModule
 {
 
     /**
      * get new model
-     * @date 2018-05-31
-     * @return Role1Model
+     * @date 2018-06-01
+     * @return RoleModel
      */
     public static function getModel()
     {
         return new RoleModel();
     }
-
 
     /**
      * 角色分配菜单
@@ -81,4 +79,6 @@ class Role extends BaseModule
         }
         return $model;
     }
+
+
 }
