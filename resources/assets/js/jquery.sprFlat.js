@@ -4,7 +4,6 @@
 // by SuggeElson www.suggeelson.com
 
 (function ($) {
-
     // here we go!
     $.sprFlat = function (element, options) {
 
@@ -591,18 +590,12 @@
                     //absolute url is enabled
                     var newDomain = 'http://' + domain + window.location.pathname;
                     this.setCurrentClass(navLinks, newDomain);
-
                 } else {
-                    //absolute url is disabled
-                    var afterDomain = window.location.pathname.split('/');
-                    var afterDomain = afterDomain.pop();
-                    if (plugin.settings.sideNav.subDir != '') {
-                        var afterDomain = window.location.pathname + plugin.settings.sideNav.subDir;
-                    }
-                    this.setCurrentClass(navLinks, afterDomain);
+                    this.setCurrentClass(navLinks, window.location.pathname);
                 }
             }
         }
+
 
         plugin.setCurrentClass = function (mainNavLinkAll, url) {
             mainNavLinkAll.each(function (index) {

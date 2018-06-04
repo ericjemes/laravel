@@ -40,8 +40,17 @@ class MenuController extends Controller
             ];
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $query = array_except($param, ['page','size']);
-            $this->viewData['tpl'] = MenuTpl::getTpl($query);
             $this->viewData['data'] = Menu::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', MenuTpl::$header);
+            $default = [
+                'parent_id' => [
+                    'type' => 'select',
+                    'list' => [
+                        '0' => '根菜单',
+                    ],
+                ],
+            ];
+            $default['parent_id']['list'] = $default['parent_id']['list'] + Menu::bootMenu();;
+            $this->viewData['tpl'] = MenuTpl::getTpl($query, $default);
             return $this->view('list');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -83,7 +92,16 @@ class MenuController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = MenuTpl::getTpl(Menu::show($param));
+            $default = [
+                'parent_id' => [
+                    'type' => 'select',
+                    'list' => [
+                        '0' => '根菜单',
+                    ],
+                ],
+            ];
+            $default['parent_id']['list'] = $default['parent_id']['list'] + Menu::bootMenu();;
+            $this->viewData['tpl'] = MenuTpl::getTpl(Menu::show($param), $default);
             return $this->view('update');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -99,7 +117,16 @@ class MenuController extends Controller
     public function add()
     {
         try {
-            $this->viewData['tpl'] = MenuTpl::getTpl();
+            $default = [
+                'parent_id' => [
+                    'type' => 'select',
+                    'list' => [
+                        '0' => '根菜单',
+                    ],
+                ],
+            ];
+            $default['parent_id']['list'] = $default['parent_id']['list'] + Menu::bootMenu();
+            $this->viewData['tpl'] = MenuTpl::getTpl([], $default);
             return $this->view('add');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage());

@@ -5,7 +5,29 @@ namespace App\Module\Tpl;
 
 class BaseTpl
 {
-    public static function getTpl($param = [])
+
+    /**
+     * 初始化数据 及选项
+     * @author gaojian291
+     * @date 2018-06-04
+     * @param array $param option value值 [
+     *      'id' => 1001,
+     *      'name' => 'demo'
+     * ]
+     * @param array $default option 通用tpl处理 [
+     *      'parent_id' => [
+     *          'key' => 'parent_id',
+     *          'name' => '父菜单ID',
+     *          'type' => 'text',
+     *          'require' => false,
+     *          'readonly' => false,
+     *          'value' => '',
+     *          'select' => [],
+     *      ],
+     * ]
+     * @return array
+     */
+    public static function getTpl($param = [], $default = [])
     {
         $self = new static;
         $self::$tpl = array_map(function($val) use ($param) {
@@ -17,6 +39,13 @@ class BaseTpl
             }
             return $val;
         }, $self::$tpl);
+        if ($default) {
+            foreach ($default as $key => $val) {
+                if (isset($self::$tpl[$key])) {
+                    $self::$tpl[$key] = array_merge($self::$tpl[$key], $val);
+                }
+            }
+        }
         return $self;
     }
 

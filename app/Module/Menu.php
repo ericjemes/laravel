@@ -55,4 +55,14 @@ class Menu extends BaseModule
         return [];
     }
 
+
+    /**
+     * get boot menu
+     * @return array
+     */
+    public static function bootMenu()
+    {
+        return MenuModel::where('parent_id', 0)->lists('name', 'id')->toArray();
+    }
+
 }

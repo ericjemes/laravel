@@ -6,7 +6,7 @@
             <div class="outlet">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="panel panel-default toggle">
+                        <div class="panel panel-default toggle panel-closed">
                             <div class="panel-heading">
                                 <h3 class="panel-title">检索条件</h3>
                             </div>
@@ -44,6 +44,9 @@
                                         </label>
                                         <label class="control-label">
                                             <button type="button" class="btn J_reset">重 置</button>
+                                        </label>
+                                        <label class="control-label" style="margin-left: 13px">
+                                            <a type="button" class="btn btn-default" href="add">添 加</a>
                                         </label>
                                     </div>
                                 </form>
