@@ -97,14 +97,12 @@ class Role extends BaseTpl
     ];
 
     public static $query = [
-        'id',
-        'is_admin',
-        'name',
-        'desc',
-        'menu_json',
-        'status',
-        'create_time',
-        'update_time',
+//        'id',
+//        'is_admin',
+//        'name',
+//        'desc',
+//        'menu_json',
+
     ];
 
     public static $buttons = [

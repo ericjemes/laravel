@@ -1,93 +1,105 @@
 $(document).ready(function() {
 
 //------------- Extend table tools -------------//
-$.extend( true, $.fn.DataTable.TableTools.classes, {
-	"container": "DTTT btn-group",
-	"buttons": {
-		"normal": "btn btn-default",
-		"disabled": "disabled"
-	},
-	"collection": {
-		"container": "DTTT_dropdown dropdown-menu",
-		"buttons": {
-			"normal": "",
-			"disabled": "disabled"
-		}
-	},
-	"print": {
-		"info": "DTTT_print_info modal"
-	}
-} );
+// $.extend(true, $.fn.DataTable.TableTools.classes, {
+// 	"container": "DTTT btn-group",
+// 	"buttons": {
+// 		"normal": "btn btn-default",
+// 		"disabled": "disabled"
+// 	},
+// 	"collection": {
+// 		"container": "DTTT_dropdown dropdown-menu",
+// 		"buttons": {
+// 			"normal": "",
+// 			"disabled": "disabled"
+// 		}
+// 	},
+// 	"print": {
+// 		"info": "DTTT_print_info modal"
+// 	}
+// } );
 
-// Have the collection use a bootstrap compatible dropdown
-$.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
-	"collection": {
-		"container": "ul",
-		"button": "li",
-		"liner": "a"
-	}
-});
+// // Have the collection use a bootstrap compatible dropdown
+// $.extend( true, $.fn.DataTable.TableTools.DEFAULTS.oTags, {
+// 	"collection": {
+// 		"container": "ul",
+// 		"button": "li",
+// 		"liner": "a"
+// 	}
+// });
 
 //------------- Datatables -------------//
 $('#datatable').dataTable({
+	"searching":false,
+	"ordering":false,
+    "info": false,
+    "pageLength": 50,
+    "bSort": false,
+    "bSearchable": false,
 	"sPaginationType": "bs_full", //"bs_normal", "bs_two_button", "bs_four_button", "bs_full"
-	"fnPreDrawCallback": function( oSettings ) {
-    	$('.dataTables_filter input').addClass('form-control input-large').attr('placeholder', 'Search');
-		$('.dataTables_length select').addClass('form-control input-small');
-    },
+	// "fnPreDrawCallback": function( oSettings ) {
+    	// $('.dataTables_filter input').addClass('form-control input-large').attr('placeholder', 'Search');
+		// $('.dataTables_length select').addClass('form-control input-small');
+    // },
     "oLanguage": {
 	    "sSearch": "",
 	    "sLengthMenu": "<span>_MENU_ entries</span>"
-	},
-	"bJQueryUI": false,
-	"bAutoWidth": false,
-	"sDom": "<'row'<'col-lg-6 col-md-6 col-sm-12 text-center'l><'col-lg-6 col-md-6 col-sm-12 text-center'f>r>t<'row-'<'col-lg-6 col-md-6 col-sm-12'i><'col-lg-6 col-md-6 col-sm-12'p>>",
+    },
+    // "bJQueryUI": false,
+    "bLengthChange": false,
+    "bUseRendered": false,
+    "bAutoWidth": true,
+    "bSortClasses": false,
+    "bPaginate": true,
+    "bLengthChange": false,
+    "bFilter": false,
+    // "sDom": "<'row'<'col-lg-6 col-md-6 col-sm-12 text-center'l><'col-lg-6 col-md-6 col-sm-12 text-center'f>r>t<'row-'<'col-lg-6 col-md-6 col-sm-12'i><'col-lg-6 col-md-6 col-sm-12'p>>",
 });
 
-$('#datatable1').dataTable({
-	"sPaginationType": "bs_full", //"bs_normal", "bs_two_button", "bs_four_button", "bs_full"
-	"fnPreDrawCallback": function( oSettings ) {
-    	$('.dataTables_filter input').addClass('form-control input-large').attr('placeholder', 'Search');
-		$('.dataTables_length select').addClass('form-control input-small');
-    },
-    "oLanguage": {
-	    "sSearch": "",
-	    "sLengthMenu": "<span>_MENU_ entries</span>"
-	},
-	"bJQueryUI": false,
-	"bAutoWidth": false,
-	"sDom": "<'row'<'col-lg-3 col-md-3 col-sm-12 text-center'l><'col-lg-6 col-md-6 col-sm-12 text-center'T><'col-lg-3 col-md-3 col-sm-12 text-center'f>r>t<'row-'<'col-lg-6 col-md-6 col-sm-12'i><'col-lg-6 col-md-6 col-sm-12'p>>",
-	"oTableTools": {
-		"sSwfPath": "assets/plugins/tables/datatables/tabletools/swf/copy_csv_xls_pdf.swf",
-		"aButtons": [
-			{
-				"sExtends":    "print",
-				"sButtonText": '<i class="st-printer s16 vat"></i> Print',
-				"aButtons":    [ "print" ]
-			},
-			{
-				"sExtends":    "xls",
-				"sButtonText": '<i class="im-file-excel s16 vat"></i> XLS',
-				"aButtons":    [ "xls" ]
-			},
-			{
-				"sExtends":    "pdf",
-				"sButtonText": '<i class="im-file-pdf s16 vat"></i> PDF',
-				"aButtons":    [ "pdf" ]
-			},
-			{
-				"sExtends":    "csv",
-				"sButtonText": '<i class="im-file-xml s16 vat"></i> CSV',
-				"aButtons":    [ "csv" ]
-			},
-			{
-				"sExtends":    "copy",
-				"sButtonText": '<i class="im-copy s16 vat"></i> Copy',
-				"aButtons":    [ "copy" ]
-			}
-		]
-	}
-});
+// $('#datatable1').dataTable({
+// 	"sPaginationType": "bs_full", //"bs_normal", "bs_two_button", "bs_four_button", "bs_full"
+// 	"fnPreDrawCallback": function( oSettings ) {
+//     	$('.dataTables_filter input').addClass('form-control input-large').attr('placeholder', 'Search');
+// 		$('.dataTables_length select').addClass('form-control input-small');
+//     },
+//     "oLanguage": {
+// 	    "sSearch": "",
+// 	    "sLengthMenu": "<span>_MENU_ entries</span>"
+// 	},
+// 	"bJQueryUI": false,
+// 	"bAutoWidth": false,
+// 	"sDom": "<'row'<'col-lg-3 col-md-3 col-sm-12 text-center'l><'col-lg-6 col-md-6 col-sm-12 text-center'T><'col-lg-3 col-md-3 col-sm-12 text-center'f>r>t<'row-'<'col-lg-6 col-md-6 col-sm-12'i><'col-lg-6 col-md-6 col-sm-12'p>>",
+// 	"oTableTools": {
+// 		"sSwfPath": "assets/plugins/tables/datatables/tabletools/swf/copy_csv_xls_pdf.swf",
+// 		"aButtons": [
+// 			{
+// 				"sExtends":    "print",
+// 				"sButtonText": '<i class="st-printer s16 vat"></i> Print',
+// 				"aButtons":    [ "print" ]
+// 			},
+// 			{
+// 				"sExtends":    "xls",
+// 				"sButtonText": '<i class="im-file-excel s16 vat"></i> XLS',
+// 				"aButtons":    [ "xls" ]
+// 			},
+// 			{
+// 				"sExtends":    "pdf",
+// 				"sButtonText": '<i class="im-file-pdf s16 vat"></i> PDF',
+// 				"aButtons":    [ "pdf" ]
+// 			},
+// 			{
+// 				"sExtends":    "csv",
+// 				"sButtonText": '<i class="im-file-xml s16 vat"></i> CSV',
+// 				"aButtons":    [ "csv" ]
+// 			},
+// 			{
+// 				"sExtends":    "copy",
+// 				"sButtonText": '<i class="im-copy s16 vat"></i> Copy',
+// 				"aButtons":    [ "copy" ]
+// 			}
+// 		]
+// 	}
+// });
 
  	
 //------------- Sparklines -------------//

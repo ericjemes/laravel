@@ -6,7 +6,7 @@
             <div class="outlet">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="panel panel-default toggle panel-closed J_query" style="display: none;">
+                        <div class="panel panel-default toggle panel-closed">
                             <div class="panel-heading">
                                 <h3 class="panel-title">检索条件</h3>
                             </div>
@@ -17,7 +17,9 @@
                                             <div class="form-group">
                                                 <label class="col-lg-2 col-md-2 col-sm-12 control-label">{{$val['name']}}</label>
                                                 <div class="col-lg-8 col-md-8">
-                                                    <input type="{{$val['type']}}" class="form-control" name="{{$val['key']}}" value="{{$val['value']}}" placeholder="[{{$val['name']}}] 查询">
+                                                    <input type="{{$val['type']}}" class="form-control"
+                                                           name="{{$val['key']}}" value="{{$val['value']}}"
+                                                           placeholder="[{{$val['name']}}] 查询">
                                                 </div>
                                             </div>
                                         @elseif ($val['type'] == 'select')
@@ -33,6 +35,7 @@
                                                     </select>
                                                 </div>
                                             </div>
+
                                         @endif
                                     @endforeach
                                     <div class="form-group">
@@ -57,17 +60,17 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default plain">
                             <div class="panel-heading white-bg">
-                                <h4 class="panel-title">数据列表</h4>
+                                <h4 class="panel-title">Data table</h4>
                             </div>
                             <div class="panel-body">
-                                <table class="table table-bordered" id="datatable">
+                                <table class="table display" id="datatable">
                                     <thead>
                                     <tr>
                                     @foreach($tpl::head() as $key=>$val)
                                         <th>{{$val}}</th>
                                     @endforeach
                                     @if (!empty($tpl::$buttons))
-                                        <th>操作</th>
+                                            <th>操作</th>
                                     @endif
                                     </tr>
                                     </thead>
@@ -81,9 +84,13 @@
                                             <td>
                                             @foreach($tpl::$buttons as $bKey=>$bVal)
                                                 @if($bVal['type'] == 'page')
-                                                <button type="button" class="btn btn-xs btn-default"><a href="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</a></button>
+                                                <button type="button" class="btn btn-xs btn-default"><a
+                                                href="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</a>
+                                                </button>
                                                 @elseif($bVal['type'] == 'ajax')
-                                                <button type="button" class="btn btn-xs btn-default J_confirm_modal" data-url="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</button>
+                                                <button type="button"
+                                                class="btn btn-xs btn-default J_confirm_modal"
+                                                data-url="{{str_replace('{id}',$val['id'], $bVal['url'])}}">{{$bVal['name']}}</button>
                                                 @endif
                                             @endforeach
                                             </td>
@@ -92,13 +99,6 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="pull-left"><div class="dataTables_info">total::{{$data['total']}}</div></div>
-                                        <div class="pull-right"><ul class="pagination" id="pagination1"></ul></div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,21 +108,6 @@
     </div>
     <script>
         $(function () {
-            if (parseInt({{$data['total']}}) > 0) {
-                $('#pagination1').jqPaginator({
-                    totalPages: Math.ceil({{$data['total'] / $data['size']}}),
-                    visiblePages: 10,
-                    currentPage: parseInt({{$data['page']}}),
-                    onPageChange: function (num) {
-                        if (num != parseInt({{$data['page']}})) {
-                            window.location.href = changeURLPar(window.location.href, 'page', num);
-                        }
-                    }
-                });
-            }
-
-            $('.J_query').fadeIn(1);
-
             $('.J_reset').on('click', function () {
                 $(':input', 'form').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
             });
@@ -155,29 +140,6 @@
             });
         })
 
-        function changeURLPar(destiny, par, par_value)
-        {
-            var pattern = par+'=([^&]*)';
-            var replaceText = par+'='+par_value;
-            if (destiny.match(pattern))
-            {
-                var tmp = '/\\'+par+'=[^&]*/';
-                tmp = destiny.replace(eval(tmp), replaceText);
-                return (tmp);
-            }
-            else
-            {
-                if (destiny.match('[\?]'))
-                {
-                    return destiny+'&'+ replaceText;
-                }
-                else
-                {
-                    return destiny+'?'+replaceText;
-                }
-            }
-            return destiny+'\n'+par+'\n'+par_value;
-        }
         //success notice
         function successNotice (text)
         {

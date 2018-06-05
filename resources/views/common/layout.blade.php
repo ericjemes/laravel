@@ -77,8 +77,7 @@
 <script src="/assets/js/jRespond.min.js"></script>
 <script src="/assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
-<script src="/assets/plugins/forms/autosize/jquery.autosize.js"></script>
-<script src="/assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+
 
 <script src="/assets/plugins/core/moment/moment.min.js"></script>
 <script src="/assets/plugins/charts/sparklines/jquery.sparkline.js"></script>
@@ -86,19 +85,28 @@
 <script src="/assets/plugins/forms/icheck/jquery.icheck.js"></script>
 <script src="/assets/plugins/forms/tags/jquery.tagsinput.min.js"></script>
 <script src="/assets/plugins/forms/tinymce/tinymce.min.js"></script>
-<script src="/assets/plugins/tables/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/plugins/tables/datatables/jquery.dataTablesBS3.js"></script>
-<script src="/assets/plugins/tables/datatables/tabletools/ZeroClipboard.js"></script>
-<script src="/assets/plugins/tables/datatables/tabletools/TableTools.js"></script>
-<script src="/assets/plugins/misc/highlight/highlight.pack.js"></script>
+
+<script src="/assets/plugins/misc/highlight/highlight.pack.js"></script>      <!-- 菜单相关 -->
 <script src="/assets/plugins/misc/countTo/jquery.countTo.js"></script>
 <script src="/assets/js/jquery.sprFlat.js"></script>
 <script src="/assets/js/app.js"></script>
 <script src="/assets/js/pages/blank.js"></script>
-<script src="/assets/js/pages/data-tables.js"></script>
+
+
+<script src="/assets/js/pages/jqPaginator.js"></script>
+
+{{--<script src="/assets/plugins/forms/autosize/jquery.autosize.js"></script>--}}
+{{--<script src="/assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>--}}
 
 <script src="/assets/plugins/ui/notify/jquery.gritter.js"></script>			     <!--info hint-->
 <script src="/assets/plugins/ui/bootbox/bootbox.js"></script>					 <!--fonfirm alert-->
-<script src="/assets/plugins/ui/tabdrop/bootstrap-tabdrop.js"></script>          //fonfirm alert
+<script src="/assets/plugins/ui/tabdrop/bootstrap-tabdrop.js"></script>          <!--fonfirm alert-->
+
+{{--<script src="/assets/plugins/tables/datatables/jquery.dataTables.min.js"></script>--}}
+{{--<script src="/assets/plugins/tables/datatables/jquery.dataTablesBS3.js"></script>--}}
+{{--<script src="/assets/plugins/tables/datatables/tabletools/ZeroClipboard.js"></script>--}}
+{{--<script src="/assets/plugins/tables/datatables/tabletools/TableTools.js"></script>--}}
+{{--<script src="/assets/js/pages/data-tables.js"></script>--}}
+
 </body>
 </html>

@@ -43,7 +43,7 @@ class BookController extends Controller
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $query = array_except($param, ['page','size']);
             $this->viewData['tpl'] = BookTpl::getTpl($query);
-            $this->viewData['data'] = Book::lists($query, array_get($param,'page',1), array_get($param,'size',50), 'id', 'desc', BookTpl::$header);
+            $this->viewData['data'] = Book::lists($query, array_get($param,'page',1), array_get($param,'size',10), 'id', 'desc', BookTpl::$header);
             return $this->view('list');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());

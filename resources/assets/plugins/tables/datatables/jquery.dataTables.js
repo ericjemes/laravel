@@ -11455,7 +11455,7 @@
 		
 		/* Features */
 		"sWrapper": "dataTables_wrapper",
-		"sFilter": "dataTables_filter",
+		// "sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
 		"sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
 		"sLength": "dataTables_length",
@@ -11664,7 +11664,7 @@
 						fnCallbackDraw( oSettings );
 					}
 				};
-	
+				alert(123);
 				$(nPaging).append(
 					'<a  tabindex="'+oSettings.iTabIndex+'" class="'+oClasses.sPageButton+" "+oClasses.sPageFirst+'">'+oLang.sFirst+'</a>'+
 					'<a  tabindex="'+oSettings.iTabIndex+'" class="'+oClasses.sPageButton+" "+oClasses.sPagePrevious+'">'+oLang.sPrevious+'</a>'+
@@ -11753,11 +11753,11 @@
 					iStartButton = iCurrentPage - Math.ceil(iPageCount / 2) + 1;
 					iEndButton = iStartButton + iPageCount - 1;
 				}
-	
-				
+
 				/* Build the dynamic list */
 				for ( i=iStartButton ; i<=iEndButton ; i++ )
 				{
+					alert(4123);
 					sList += (iCurrentPage !== i) ?
 						'<a tabindex="'+oSettings.iTabIndex+'" class="'+oClasses.sPageButton+'">'+oSettings.fnFormatNumber(i)+'</a>' :
 						'<a tabindex="'+oSettings.iTabIndex+'" class="'+oClasses.sPageButtonActive+'">'+oSettings.fnFormatNumber(i)+'</a>';
@@ -11975,7 +11975,7 @@
 	
 
 	// jQuery aliases
-	$.fn.DataTable = DataTable;
+	// $.fn.DataTable = DataTable;
 	$.fn.dataTable = DataTable;
 	$.fn.dataTableSettings = DataTable.settings;
 	$.fn.dataTableExt = DataTable.ext;
