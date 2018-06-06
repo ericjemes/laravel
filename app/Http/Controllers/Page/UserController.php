@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Module\Tpl\User as UserTpl;
 use Illuminate\Http\Request;
 use App\Module\User;
+use App\Module\Role;
 
 
 /**
@@ -42,7 +43,15 @@ class UserController extends Controller
             ];
             $param = self::validate($filed, array_filter($request->all(), function ($val) {return $val != '';}));
             $query = array_except($param, ['page','size']);
-            $this->viewData['tpl'] = UserTpl::getTpl($query);
+            $roles = Role::allRoles();
+            $default = [
+                'role' => [
+                    'type' => 'select',
+                    'list' => $roles,
+                ],
+            ];
+            UserTpl::$map['role'] = $roles;
+            $this->viewData['tpl'] = UserTpl::getTpl($query, $default);
             $this->viewData['data'] = User::lists($query, array_get($param,'page',1), array_get($param,'size',10), 'id', 'desc', UserTpl::$header);
             return $this->view('list');
         } catch (\Exception $e) {
@@ -64,7 +73,13 @@ class UserController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = UserTpl::getTpl(User::show($param));
+            $default = [
+                'role' => [
+                    'type' => 'select',
+                    'list' => Role::allRoles(),
+                ],
+            ];
+            $this->viewData['tpl'] = UserTpl::getTpl(User::show($param), $default);
             return $this->view('show');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());
@@ -85,7 +100,13 @@ class UserController extends Controller
             ];
             $param = compact('id');
             $param = self::validate($filed, $param);
-            $this->viewData['tpl'] = UserTpl::getTpl(User::show($param));
+            $default = [
+                'role' => [
+                    'type' => 'select',
+                    'list' => Role::allRoles(),
+                ],
+            ];
+            $this->viewData['tpl'] = UserTpl::getTpl(User::show($param), $default);
             return $this->view('update');
         } catch (\Exception $e) {
             return $this->errorView($e->getMessage(), $e->getCode());

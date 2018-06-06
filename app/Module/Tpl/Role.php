@@ -97,12 +97,9 @@ class Role extends BaseTpl
     ];
 
     public static $query = [
-//        'id',
-//        'is_admin',
-//        'name',
-//        'desc',
-//        'menu_json',
-
+        'id',
+        'is_admin',
+        'name',
     ];
 
     public static $buttons = [
@@ -114,7 +111,12 @@ class Role extends BaseTpl
         [
             'type' => 'page',
             'name' => '更新',
-            'url' => "/role/update/{id}"
+            'url' => "/role/align/{id}"
+        ],
+        [
+            'type' => 'page',
+            'name' => '分配菜单',
+            'url' => "/role/align/{id}"
         ],
         [
             'type' => 'ajax',

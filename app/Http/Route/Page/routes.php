@@ -11,6 +11,7 @@ $router->get('role/list', 'Page\RoleController@lists')->name('role.list');
 $router->get('role/add', 'Page\RoleController@add')->name('role.add');
 $router->get('role/show/{id}', 'Page\RoleController@show')->name('role.show');
 $router->get('role/update/{id}', 'Page\RoleController@update')->name('role.update');
+$router->get('role/align/{id}', 'Page\RoleController@align')->name('role.align');
 
 //User
 $router->get('user/list', 'Page\UserController@lists')->name('user.list');

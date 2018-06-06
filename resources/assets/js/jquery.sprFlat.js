@@ -1139,8 +1139,8 @@
                 text = navel.children('.indicator').remove().end().text();
                 breadcrumb.append('<li>' + text + '</li>');
             } else {
-                icon = navel.children('i').prop('outerHTML');
-                text = navel.children('.indicator').remove().end().text();
+                // icon = navel.children('i').prop('outerHTML');
+                // text = navel.children('.indicator').remove().end().text();
                 breadcrumb.append('<li>' + icon + ' ' + text + '</li>');
             }
         }

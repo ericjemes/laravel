@@ -20,7 +20,12 @@
 											<select multiple="multiple" size="10" name="duallistbox" class="duallistbox col-lg-12">
 												<optgroup label="Mountain Time Zone">
 													@foreach($data as $key=>$val)
-													<option value="{{$val['id']}}" @if($val['selected']) selected @endif>&nbsp&nbsp&nbsp{{$val['name']}}</option>
+													<option value="{{$val['id']}}" @if($val['selected']) selected @endif>{{$val['name']}}</option>
+                                                    @if($val['subMenu'])
+                                                    @foreach($val['subMenu']   as $skey=>$sval)
+                                                    <option value="{{$sval['id']}}"@if($sval['selected']) selected @endif>  > {{ $sval['name']}}</option>
+                                                    @endforeach
+                                                    @endif
 													@endforeach
 												</optgroup>
 											</select>
@@ -68,9 +73,9 @@
 					}
 				});
                 $.ajax({
-                    url: "{{$ajax}}",
+                    url: "{{$tpl::$updateUrl}}",
                     type:'post',
-                    data: {'id':'{{$id}}','{{$update_key}}':param.join()},
+                    data: {'id':'{{$id}}', 'menu_json':param.join()},
                     success: function(data) {
                         if (data.code == 0)
                         {

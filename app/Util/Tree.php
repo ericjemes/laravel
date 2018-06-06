@@ -23,7 +23,7 @@ class Tree
      * @param string $childName option 生成的数组子菜单的key名称
      * @return array
      */
-    public static function _formatMenuData(array $data, $parentID = 'iParentID', $currID = 'iAutoID', $childName = 'subMenu')
+    public static function _formatMenuData(array $data, $parentID = 'parent_id', $currID = 'id', $childName = 'subMenu')
     {
         $menulist = [];
         foreach ($data as $key => $val) {

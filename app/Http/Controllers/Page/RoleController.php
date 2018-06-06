@@ -104,4 +104,22 @@ class RoleController extends Controller
         }
     }
 
+
+    /**
+     * Role align
+     * @date 2018-06-01
+     * @return view
+     */
+    public function align($id)
+    {
+        try {
+            $this->viewData['data'] = Role::selectMenu($id);
+            $this->viewData['tpl'] = RoleTpl::getTpl();
+            $this->viewData['id'] = $id;
+            return $this->view('align');
+        } catch (\Exception $e) {
+            return $this->errorView($e->getMessage(), $e->getCode());
+        }
+    }
+
 }

@@ -2,6 +2,7 @@
 namespace App\Module;
 
 use App\Model\RoleModel;
+use App\Model\MenuModel;
 use App\Exceptions\ServiceException;
 
 
@@ -33,19 +34,15 @@ class Role extends BaseModule
     public static function selectMenu($id)
     {
         $data = self::_getModel(['id'=>$id])->toArray();
-        if ($data && $data['is_admin'] == 1) {
+        if ($data && $data['is_admin']) {
             throw new ServiceException('ADMIN_ROLE_CAN_NOT_ALIGN');
         }
         $menuID = explode(',', $data['menu_json']);
-        $menu = MenuModel::where('type', 0)->get(['id', 'name'])->toArray();
+        $menu = MenuModel::where('type', 0)->get(['id', 'name', 'parent_id'])->toArray();
         foreach ($menu as $key => &$val) {
-            if (in_array($val['id'], $menuID)) {
-                $val['selected'] = true;
-            } else {
-                $val['selected'] = false;
-            }
+            $val['selected'] = in_array($val['id'], $menuID);
         }
-        return $menu;
+        return \App\Util\Tree::_formatMenuData($menu);
     }
 
 
@@ -60,6 +57,17 @@ class Role extends BaseModule
     public static function getRoleInfoByIDs($ids)
     {
         return RoleModel::whereIn('id', $ids)->lists('name', 'id')->toArray();
+    }
+
+
+    /**
+     * 获取所有角色信息
+     * @date 2017-06-06
+     * @return array
+     */
+    public static function allRoles()
+    {
+        return RoleModel::lists('name', 'id')->toArray();
     }
 
 

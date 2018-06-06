@@ -94,7 +94,7 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="pull-left"><div class="dataTables_info">total::{{$data['total']}}</div></div>
+                                        <div class="pull-left"><div class="dataTables_info">total:{{$data['total']}}</div></div>
                                         <div class="pull-right"><ul class="pagination" id="pagination1"></ul></div>
                                         <div class="clearfix"></div>
                                     </div>
