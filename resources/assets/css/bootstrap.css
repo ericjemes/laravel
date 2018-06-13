@@ -174,8 +174,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-td,
-th {
+td, th {
+  word-break: keep-all;white-space:nowrap;
   padding: 0;
 }
 @media print {
